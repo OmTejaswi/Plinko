@@ -1,4 +1,4 @@
-var Engine = Matter.Engine,
+const Engine = Matter.Engine,
   World = Matter.World,
   Events = Matter.Events,
   Bodies = Matter.Bodies;
@@ -11,7 +11,13 @@ var score =0;
 var divisions = []
 var crossingLine;
 
+var score1 = 500;
+var score2 = 100;
+var score3 = 200;
+
 var gameState = "play";
+
+
 
 
 function setup() {
@@ -71,9 +77,11 @@ function draw() {
    }
 
  
+
   for (var j = 0; j < particles.length; j++) {
    
      particles[j].display();
+
    }
    for (var k = 0; k < divisions.length; k++) {
      
@@ -89,25 +97,57 @@ function draw() {
     //particles = null;
   }
 
+  scoreX();
+
   push();
   strokeWeight(3);
   stroke("yellow");
   line(0,450,800,450)
   pop();
 
+
+    text(score2, width/2.4, height/2+120);
+    text(score2, width/1.9, height/2+120);
+    text(score2, width/1.6, height/2+120);
+
+    text(score3, width/1.4, height/2+120);
+    text(score3, width/1.2, height/2+120);
+    text(score3, width/1.1, height/2+120);
+
+  for(var i = 0; i < 4; i++) {
+    text(score1,15+(width/10)*i,height/2+120);
+  }
+
+
    textSize(20);
    text("Score: "+score, width/10,height/30);
+   
 }
 
 function mousePressed() {
 
   if(gameState == "play") {
     particles.push(new Particle(mouseX, 10,10));
-     score++;
+     //score+=500;
+     
   }
 
 }
 
-function scoreX() {
-
+function scoreX()
+{
+  if(mousePressed)
+   {
+    for(var i =0; i< particles.length; i++)
+    {
+      if(particles[i].body.position.y > 760)
+      {
+        if(particles[i].body.position.x < 300)
+        {
+          score = score+500;
+          //  particles[i] = null;
+        }
+      }
+    }
+   }
 }
