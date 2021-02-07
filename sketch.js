@@ -94,7 +94,11 @@ function draw() {
     gameState = "end";
   }
   if(gameState == "end") {
-    //particles = null;
+    push();
+    textSize(35);
+    textAlign(CENTER);
+    text("Game Over",width/2, height/3.1);
+    pop();
   }
 
   scoreX();
@@ -136,16 +140,23 @@ function mousePressed() {
 
 function scoreX()
 {
+
   if(mousePressed)
    {
     for(var i =0; i< particles.length; i++)
     {
-      if(particles[i].body.position.y > 760)
+      if(particles[i].body.position.y > 760 && particles[i].body.position.y < 761)
       {
-        if(particles[i].body.position.x < 300)
+        if(particles[i].body.position.x < 320)
         {
           score = score+500;
           //  particles[i] = null;
+        } else if(particles[i].body.position.x > 320 && particles[i].body.position.x < 570)
+        {
+          score = score+100;
+        } else if(particles[i].body.position.x > 570 && particles[i].body.position.x < 800) 
+        {
+          score = score+200;
         }
       }
     }
